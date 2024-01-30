@@ -1,0 +1,52 @@
+@OrionCalcApi_HostAddress = https://localhost:32772
+
+
+###
+
+POST {{OrionCalcApi_HostAddress}}/api/subtract
+Content-Type: application/json
+
+{
+  "numbers": [
+    "3","3","3"
+  ],
+  "baseNumberSystem": "10"
+}
+
+###
+
+POST {{OrionCalcApi_HostAddress}}/api/multiply
+Content-Type: application/json
+
+{
+  "numbers": [
+    "3","3","3"
+  ],
+  "baseNumberSystem": "10"
+}
+
+###
+
+POST {{OrionCalcApi_HostAddress}}/api/divide
+Content-Type: application/json
+
+{
+  "numbers": [
+    "3","3","3"
+  ],
+  "baseNumberSystem": "10"
+}
+
+###
+
+POST {{OrionCalcApi_HostAddress}}/api/add
+Content-Type: application/json
+
+{
+   "numbers": [
+    "3","-79,228,162,514,264,337,593,543,950,333","79,228,162,514,264,337,593,543,950,332","3","3"
+  ],
+  "baseNumberSystem": "10"
+}
+
+###
