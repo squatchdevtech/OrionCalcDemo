@@ -2,7 +2,7 @@
 {
     public class CommonTypes
     {
-        public enum MathFunctions
+        public enum MathFunction
         {
             Add, 
             Subtract, 

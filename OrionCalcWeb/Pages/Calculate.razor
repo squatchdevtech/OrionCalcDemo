@@ -1,6 +1,7 @@
 ﻿@page "/calc"
 @using System.Net.Http
 @using System.Collections
+@using OrionCalcWeb.Data
 @inject HttpClient Http
 
 
@@ -9,14 +10,51 @@
 <h1>Do some math!</h1>
 
 <div class='container'>
+     <div class="row">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnAdd" autocomplete="off" checked @onclick="@(e => updateOperation(CommonTypes.MathFunction.Add))">
+            <label class="btn btn-outline-primary" for="btnAdd">Add</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnSubtract" autocomplete="off" @onclick="@(e => updateOperation(CommonTypes.MathFunction.Subtract))">
+            <label class="btn btn-outline-primary" for="btnSubtract">Subtract</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnMultiply" autocomplete="off" @onclick="@(e => updateOperation(CommonTypes.MathFunction.Multiply))">
+            <label class="btn btn-outline-primary" for="btnMultiply">Multiply</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnDivide" autocomplete="off" @onclick="@(e => updateOperation(CommonTypes.MathFunction.Divide))">
+            <label class="btn btn-outline-primary" for="btnDivide">Divide</label>
+        </div>
+    </div>
+    @for(var i = 0; i< 5;i++)
+    {
+        var localI = i;
+        var displayNum = i + 1;
         <div class="row">
-            <button onclick="@AddItem">Test</button>
+            <div class="col-3"><span>Enter number @displayNum</span></div>
+            <div class="col-4"><input type="text" onchange="@((ChangeEventArgs __e) => values[localI] = __e?.Value?.ToString())" /> </div>
+        </div>
+    }
+
+        <div class="row">
+            <div class="col-3"><button class="btn btn-primary" onclick="@ExecuteMath">Calculate!</button></div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <input type="text" class="text-lg-center" @bind="results" />
+            </div>
         </div>
 </div>
 
 
 
 @code {
+    private string[] values = new string[5];
+
+    private string results = "";
+
+    private CommonTypes.MathFunction currentOperation = CommonTypes.MathFunction.Add;
+
     public class SubmittedItems
     {
         public string[] numbers { get; set; }
@@ -29,15 +67,68 @@
         public string? Message { get; set; }
         public bool IsSuccess { get; set; }
         public ArrayList Values { get; set; }
-
-
     }
 
-    private async Task AddItem()
+    private void updateOperation(CommonTypes.MathFunction mathFunction) => currentOperation = mathFunction;
+
+    private async Task ExecuteMath()
     {
-        var addItem = new SubmittedItems  { numbers = ["2","3"], baseNumberSystem = "ten"};
-        var resp = await Http.PostAsJsonAsync("Add", addItem);
+        var strList = GetValuesInputed();
+
+        //string apiController = "add"
+        var mathItem = new SubmittedItems();
+        mathItem.numbers = strList;
+        mathItem.baseNumberSystem = "baseTen";
+
+        string endpoint = GetEndPointString(currentOperation);
+
+        Console.WriteLine(values[0]);
+        var resp = await Http.PostAsJsonAsync(endpoint, mathItem);
         var content = await resp.Content.ReadFromJsonAsync<MathResult>() ?? new MathResult();
 
+        if(content.IsSuccess)
+        {
+            results = content.FinalValue.ToString();
+        } else
+        {
+            results = content.Message;
+        }
+    }
+
+    private string GetEndPointString(CommonTypes.MathFunction mathFunction)
+    {
+        string endpointStr = "Add";
+        switch(mathFunction)
+        {
+            case CommonTypes.MathFunction.Subtract:
+                endpointStr = "Subtract";
+                break;
+            case CommonTypes.MathFunction.Multiply:
+                endpointStr = "Multiply";
+                break;
+            case CommonTypes.MathFunction.Divide:
+                endpointStr = "Divide";
+                break;
+        }
+        // if(mathFunction == CommonTypes.MathFunction.Subtract)
+        // {
+        //     endpointStr = "Subtract";
+        // }
+
+        return endpointStr;
+    }
+
+    private string[] GetValuesInputed()
+    {
+        ArrayList list = new ArrayList();
+
+        foreach(var str in values)
+        {
+            if(!String.IsNullOrEmpty(str))
+            {
+                list.Add(str);
+            }
+        }
+        return (string[])list.ToArray(typeof(string));
     }
 }
