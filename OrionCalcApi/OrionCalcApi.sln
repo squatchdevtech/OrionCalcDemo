@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrionCalcWeb", "..\OrionCal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrionCalcTests", "..\OrionCalcTests\OrionCalcTests.csproj", "{44D78388-232D-4E22-B281-8555216EA024}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "OrionCalcShared", "..\OrionCalcShared\OrionCalcShared.shproj", "{CD24E8D3-BB05-4D9C-BFFA-BCDCB89D9827}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,5 +35,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4BE7A20-54DD-43A4-BF79-77D2C531CE3F}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\OrionCalcShared\OrionCalcShared.projitems*{4bbee969-7557-4979-8194-e6c1a3d2aabc}*SharedItemsImports = 5
+		..\OrionCalcShared\OrionCalcShared.projitems*{5d1cf002-1ff9-4ee0-b848-991f036b6435}*SharedItemsImports = 5
+		..\OrionCalcShared\OrionCalcShared.projitems*{cd24e8d3-bb05-4d9c-bffa-bcdcb89d9827}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,4 @@
-﻿using OrionCalcApi.BAL;
+﻿using OrionCalcShared.DataObjects;
 
 namespace OrionCalcApi.BLL
 {

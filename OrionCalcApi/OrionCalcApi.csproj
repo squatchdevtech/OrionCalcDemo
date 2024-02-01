@@ -16,4 +16,6 @@
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
   </ItemGroup>
 
+  <Import Project="..\OrionCalcShared\OrionCalcShared.projitems" Label="Shared" />
+
 </Project>

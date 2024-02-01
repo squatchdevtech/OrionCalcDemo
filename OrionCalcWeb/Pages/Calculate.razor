@@ -1,7 +1,8 @@
 ﻿@page "/calc"
 @using System.Net.Http
 @using System.Collections
-@using OrionCalcWeb.Data
+@using OrionCalcShared.DataObjects
+@using OrionCalcShared.Enums
 @inject HttpClient Http
 
 
@@ -54,20 +55,6 @@
     private string results = "";
 
     private CommonTypes.MathFunction currentOperation = CommonTypes.MathFunction.Add;
-
-    public class SubmittedItems
-    {
-        public string[] numbers { get; set; }
-        public string? baseNumberSystem { get; set; }
-    }
-
-    public class MathResult
-    {
-        public decimal FinalValue { get; set; }
-        public string? Message { get; set; }
-        public bool IsSuccess { get; set; }
-        public ArrayList Values { get; set; }
-    }
 
     private void updateOperation(CommonTypes.MathFunction mathFunction) => currentOperation = mathFunction;
 

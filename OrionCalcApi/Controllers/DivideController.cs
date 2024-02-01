@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OrionCalcApi.BAL;
 using OrionCalcApi.BLL;
+using OrionCalcShared.DataObjects;
 
 namespace OrionCalcApi.Controllers
 {

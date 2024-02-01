@@ -1,4 +1,4 @@
-﻿namespace OrionCalcApi.BAL
+namespace OrionCalcShared.DataObjects
 {
     public class SubmittedItems
     {

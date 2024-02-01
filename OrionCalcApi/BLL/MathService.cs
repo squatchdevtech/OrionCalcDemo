@@ -1,5 +1,5 @@
-﻿using OrionCalcApi.BAL;
-using OrionCalcApi.Helpers;
+﻿using OrionCalcApi.Helpers;
+using OrionCalcShared.DataObjects;
 using System.Collections;
 
 namespace OrionCalcApi.BLL

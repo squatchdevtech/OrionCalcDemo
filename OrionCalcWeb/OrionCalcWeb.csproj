@@ -11,5 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.1" PrivateAssets="all" />
   </ItemGroup>
 
+  <Import Project="..\OrionCalcShared\OrionCalcShared.projitems" Label="Shared" />
+
 
 </Project>
