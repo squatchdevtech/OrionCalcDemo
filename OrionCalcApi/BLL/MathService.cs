@@ -1,5 +1,6 @@
 ﻿using OrionCalcApi.Helpers;
 using OrionCalcShared.DataObjects;
+using OrionCalcShared.Enums;
 using System.Collections;
 
 namespace OrionCalcApi.BLL
@@ -7,7 +8,7 @@ namespace OrionCalcApi.BLL
     public interface IMathService
     {
         bool ProcessAndErrorCheckValues(SubmittedItems items);
-        void DoMath(string type);
+        void DoMath(CommonTypes.MathFunction mathFunction);
 
     }
     public class MathService : IMathService
@@ -43,7 +44,7 @@ namespace OrionCalcApi.BLL
             return true;
         }
 
-        public void DoMath(string type)
+        public void DoMath(CommonTypes.MathFunction mathFunction)
         {
             decimal finalValue = (decimal)mathResult.Values[0];
             decimal lastValue = 0;
@@ -52,7 +53,7 @@ namespace OrionCalcApi.BLL
                 for(int i = 1; i < mathResult.Values.Count; i++)
                 {
                     lastValue = (decimal)mathResult.Values[i];
-                    finalValue = ExecuteMath(finalValue, lastValue, type);
+                    finalValue = ExecuteMath(finalValue, lastValue, mathFunction);
                 }
 
                 mathResult.FinalValue = finalValue;
@@ -70,19 +71,19 @@ namespace OrionCalcApi.BLL
             }
         }
 
-        protected decimal ExecuteMath(decimal result, decimal secondVal, string action)
+        protected decimal ExecuteMath(decimal result, decimal secondVal, CommonTypes.MathFunction action)
         {
             switch (action) {
-                case "+":
+                case CommonTypes.MathFunction.Add:
                     result += secondVal;
                     break;
-                case "-":
-                    result += secondVal;
+                case CommonTypes.MathFunction.Subtract:
+                    result -= secondVal;
                     break;
-                case "/":
+                case CommonTypes.MathFunction.Divide:
                     result /= secondVal;
                     break;
-                case "*":
+                case CommonTypes.MathFunction.Multiply:
                     result *= secondVal;
                     break;
             }

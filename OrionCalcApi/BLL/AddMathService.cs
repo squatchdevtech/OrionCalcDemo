@@ -1,4 +1,5 @@
 ﻿using OrionCalcShared.DataObjects;
+using OrionCalcShared.Enums;
 
 namespace OrionCalcApi.BLL
 {
@@ -20,7 +21,7 @@ namespace OrionCalcApi.BLL
                 }
 
                 //DoAddition();
-                DoMath("+");
+                DoMath(CommonTypes.MathFunction.Add);
                 
             } catch (Exception)
             {
