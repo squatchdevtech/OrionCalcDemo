@@ -6,7 +6,6 @@ namespace OrionCalcApi.BLL
     public interface IAddMathService
     {
         MathResult AddItems(SubmittedItems items);
-        void DoAddition();
     }
     public class AddMathService : MathService, IAddMathService
     {
@@ -20,8 +19,10 @@ namespace OrionCalcApi.BLL
                     return mathResult;
                 }
 
+                var mathFunc = DoAdd;
+
                 //DoAddition();
-                DoMath(CommonTypes.MathFunction.Add);
+                DoMath(mathFunc);
                 
             } catch (Exception)
             {
@@ -33,25 +34,9 @@ namespace OrionCalcApi.BLL
             return mathResult;
         }
 
-        public void DoAddition()
+        public decimal DoAdd(decimal dec1, decimal dec2)
         {
-            decimal finalValue = 0;
-            decimal lastValue = 0;
-            try
-            {
-                foreach (var dec in mathResult.Values)
-                {
-                    lastValue = (decimal)dec;
-                    finalValue += lastValue;
-                }
-
-                mathResult.FinalValue = finalValue;
-                mathResult.IsSuccess = true;
-            } catch(OverflowException)
-            {
-                mathResult.Message = String.Format("The result of the equation exceeded the bounds of the decimal parameter. {0} + {1} failed.",finalValue,lastValue);
-                mathResult.IsSuccess = false;
-            } 
+            return dec1 + dec2;
         }
     }
 }

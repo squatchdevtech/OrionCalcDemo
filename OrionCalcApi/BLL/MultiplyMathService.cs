@@ -19,8 +19,8 @@ namespace OrionCalcApi.BLL
                     //bail with prepopulated error message
                     return mathResult;
                 }
-
-                DoMath(CommonTypes.MathFunction.Multiply);
+                var mathFunc = DoMultiply;
+                DoMath(mathFunc);
             }
             catch (Exception)
             {
@@ -29,6 +29,11 @@ namespace OrionCalcApi.BLL
             }
 
             return mathResult;
+        }
+
+        public decimal DoMultiply(decimal dec1, decimal dec2)
+        {
+            return dec1 * dec2;
         }
     }
 }

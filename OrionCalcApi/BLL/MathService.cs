@@ -8,7 +8,7 @@ namespace OrionCalcApi.BLL
     public interface IMathService
     {
         bool ProcessAndErrorCheckValues(SubmittedItems items);
-        void DoMath(CommonTypes.MathFunction mathFunction);
+        void DoMath(Func<decimal, decimal, decimal> mathFunction);
 
     }
     public class MathService : IMathService
@@ -44,7 +44,7 @@ namespace OrionCalcApi.BLL
             return true;
         }
 
-        public void DoMath(CommonTypes.MathFunction mathFunction)
+        public void DoMath(Func<decimal, decimal, decimal> mathFunction)
         {
             decimal finalValue = (decimal)mathResult.Values[0];
             decimal lastValue = 0;
@@ -52,8 +52,7 @@ namespace OrionCalcApi.BLL
             {
                 for(int i = 1; i < mathResult.Values.Count; i++)
                 {
-                    lastValue = (decimal)mathResult.Values[i];
-                    finalValue = ExecuteMath(finalValue, lastValue, mathFunction);
+                    finalValue = mathFunction(finalValue, (decimal)mathResult.Values[i]);
                 }
 
                 mathResult.FinalValue = finalValue;

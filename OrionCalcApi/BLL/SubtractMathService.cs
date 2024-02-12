@@ -20,8 +20,8 @@ namespace OrionCalcApi.BLL
                     //bail with prepopulated error message
                     return mathResult;
                 }
-
-                DoMath(CommonTypes.MathFunction.Subtract);
+                var mathFunc = DoSubtract;
+                DoMath(mathFunc);
             }
             catch (Exception)
             {
@@ -31,6 +31,10 @@ namespace OrionCalcApi.BLL
 
 
             return mathResult;
+        }
+
+        public decimal DoSubtract(decimal dec1, decimal dec2) { 
+            return dec1 - dec2;
         }
 
 

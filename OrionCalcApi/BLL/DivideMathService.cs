@@ -27,8 +27,8 @@ namespace OrionCalcApi.BLL
                     mathResult.IsSuccess = false;
                     return mathResult;
                 }
-
-                DoMath(CommonTypes.MathFunction.Divide);
+                var mathFunc = DoDivision;
+                DoMath(mathFunc);
 
 
             }
@@ -40,6 +40,11 @@ namespace OrionCalcApi.BLL
 
 
             return mathResult;
+        }
+
+        public decimal DoDivision(decimal dec1, decimal dec2)
+        {
+            return dec1/dec2;
         }
 
         /*
